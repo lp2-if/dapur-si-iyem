@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Food;
+use App\Model\Ingredient;
 use Illuminate\Http\Request;
 
 class FoodController extends Controller
@@ -21,6 +22,8 @@ class FoodController extends Controller
         $contents = str_replace('"', null, $contents);
         $contents = explode('\n', $contents);
 
+        $ingredients = Ingredient::all();
+
         $delimiter = ',';
         unset($contents[0]);
         $contents = array_values($contents);
@@ -31,12 +34,17 @@ class FoodController extends Controller
                 $tutorial = $data[1];
                 $recipe = $data[2];
                 $image = $data[3];
-                Food::create([
+                $food = Food::create([
                     'name' => $name,
                     'tutorial' => $tutorial,
                     'recipe' => $recipe,
                     'image' => $image
                 ]);
+                foreach ($ingredients as $ingredient) {
+                    if (strpos(strtolower($food->recipe),$ingredient->name) !== false) {
+                        $ingredient->foods()->attach($food->id);
+                    }
+                }
             }
         }
         return back();
