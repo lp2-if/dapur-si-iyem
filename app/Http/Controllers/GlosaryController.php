@@ -19,14 +19,16 @@ class GlosaryController extends Controller
         $contents = file_get_contents($file, 'public');
         $contents = json_encode($contents);
         $contents = str_replace('"', null, $contents);
-        $contents = explode('\n', $contents);
-
+        $contents = explode('\r\n', $contents);
+//        dd($contents);
         $delimiter = ',';
         unset($contents[0]);
         $contents = array_values($contents);
+
         foreach ($contents as $content) {
             if($content != ""){
                 $data = explode($delimiter, $content);
+//                dd($data);
                 $name = $data[0];
                 $description = $data[1];
                 Glosary::create([
