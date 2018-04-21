@@ -29,9 +29,11 @@ class FoodController extends Controller
                 $data = explode($delimiter, $content);
                 $name = $data[0];
                 $tutorial = $data[1];
+                $recipe = $data[2];
                 Food::create([
                     'name' => $name,
-                    'tutorial' => $tutorial
+                    'tutorial' => $tutorial,
+                    'recipe' => $recipe
                 ]);
             }
         }

@@ -17,7 +17,6 @@ class CreateBahanMakananTable extends Migration
             $table->increments('id');
             $table->integer('food_id');
             $table->integer('ingredient_id');
-            $table->string('quantity');
             $table->timestamps();
             $table->softDeletes();
         });
