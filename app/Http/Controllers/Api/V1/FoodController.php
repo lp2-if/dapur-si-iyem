@@ -16,7 +16,18 @@ class FoodController extends ApiBaseController
 {
     public function index()
     {
-        $foods = Food::all();
-        return $this->send($foods);
+        $ingredientsId = [1,2,3];
+        $foods = Food::with('ingredients')->get();
+        foreach ($foods as $food){
+            $exist = 0;
+            foreach ($food->ingredients as $ingredient){
+                if (in_array($ingredient->id, $ingredientsId)){
+                    $exist++;
+                }
+            }
+            $food['missing'] = $food->ingredients->count() - $exist;
+        }
+        $sortedFoods = $foods->sortBy('missing');
+        return $this->send($sortedFoods->values()->all());
     }
 }
