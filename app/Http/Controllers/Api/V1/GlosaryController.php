@@ -16,7 +16,7 @@ class GlosaryController extends ApiBaseController
 {
     public function index()
     {
-        $glosaries = Glosary::all(['id', 'name', 'description']);
+        $glosaries = Glosary::all(['id', 'name']);
 
         $res = [];
 
@@ -28,5 +28,16 @@ class GlosaryController extends ApiBaseController
         }
 
         return $this->send($res);
+    }
+
+    public function show(Glosary $glosary)
+    {
+        $requiredData = [
+            'id' => $glosary->id,
+            'name' => $glosary->name,
+            'description' => $glosary->description
+        ];
+
+        return $this->send($requiredData);
     }
 }

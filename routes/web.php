@@ -22,6 +22,7 @@ Route::group(['prefix' => '/api/v1', 'namespace' => 'Api\V1'], function() {
 
     Route::group(['prefix' => 'glosary'], function() {
         Route::get('/', 'GlosaryController@index')->name('api.glosary.index');
+        Route::get('/{glosary}', 'GlosaryController@show')->name('api.glosary.index');
     });
 
     Route::group(['prefix' => 'ingredient'], function() {
