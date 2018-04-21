@@ -27,6 +27,6 @@ class GlosaryController extends ApiBaseController
             array_push($res[$glosary->name[0]],$glosary);
         }
 
-        return $res;
+        return $this->send($res);
     }
 }
