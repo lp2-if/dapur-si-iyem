@@ -39,4 +39,17 @@ class FoodController extends Controller
         }
         return back();
     }
+
+    public function download()
+    {
+        $res = Food::select('name','tutorial','recipe')->get();
+        $str = "name,tutorial,recipe\n";
+        foreach ($res as $key) {
+            $str .= $key['name'].','.$key['tutorial'].','.$key['recipe']."\n";
+        }
+        $file = fopen("all_recipes.csv","w");
+        fwrite($file,$str);
+        fclose($file);
+        return response()->download("all_recipes.csv")->deleteFileAfterSend(true);
+    }
 }
