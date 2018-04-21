@@ -13,13 +13,13 @@ class CreateMakananTable extends Migration
      */
     public function up()
     {
-        Schema::create('makanan', function (Blueprint $table) {
+        Schema::create('foods', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama');
-            $table->longText('cara');
-            $table->string('slug');
-            $table->string('gambar');
+            $table->string('name');
+            $table->longText('tutorial');
+            $table->string('image');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateMakananTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('makanan');
+        Schema::dropIfExists('foods');
     }
 }

@@ -13,11 +13,12 @@ class CreateIstilahTable extends Migration
      */
     public function up()
     {
-        Schema::create('istilah', function (Blueprint $table) {
+        Schema::create('glosaries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('deskripsi');
+            $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateIstilahTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('istilah');
+        Schema::dropIfExists('glosaries');
     }
 }
