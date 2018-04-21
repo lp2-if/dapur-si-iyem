@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::group(['prefix' => '/api/v1', 'namespace' => 'Api\V1'], function() {
     Route::group(['prefix' => 'food'], function() {
         Route::get('/', 'FoodController@index')->name('api.food.index');
+        Route::get('/{food}', 'FoodController@show')->name('api.food.show');
     });
 
     Route::group(['prefix' => 'glosary'], function() {
@@ -27,7 +28,7 @@ Route::group(['prefix' => '/api/v1', 'namespace' => 'Api\V1'], function() {
 
     Route::group(['prefix' => 'ingredient'], function() {
         Route::get('/', 'IngredientController@index')->name('api.ingredient.index');
-        Route::get('/{ingredient}', 'IngredientController@show')->name('api.glosary.show');
+        Route::get('/{ingredient}', 'IngredientController@show')->name('api.ingredient.show');
     });
 });
 
@@ -46,4 +47,5 @@ Route::group(['prefix' => 'glosary'], function() {
 Route::group(['prefix' => 'ingredient'], function() {
     Route::get('create', 'IngredientController@create')->name('ingredient.create');
     Route::post('store', 'IngredientController@store')->name('ingredient.store');
+    Route::get('download', 'IngredientController@download');
 });

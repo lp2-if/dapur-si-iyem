@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Ingredient;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class IngredientController extends Controller
 {
@@ -34,5 +35,24 @@ class IngredientController extends Controller
             }
         }
         return back();
+    }
+
+    public function download()
+    {
+        $ingredients = Ingredient::all();
+        $filename = "ingredients.csv";
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, array('id', 'name', 'image'));
+
+        foreach ($ingredients as $ingredient)
+        {
+            fputcsv($handle, array($ingredient['id'],$ingredient['name'],$ingredient['image']));
+        }
+
+        fclose($handle);
+
+        $headers = array('Content-Type' => 'text/csv',);
+
+        return response()->download($filename, 'ingredients.csv', $headers);
     }
 }
