@@ -17,7 +17,7 @@ class CreateMakananTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->longText('tutorial');
-            $table->string('image');
+            $table->string('image')->nullable(true);
             $table->timestamps();
             $table->softDeletes();
         });

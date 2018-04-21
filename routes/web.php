@@ -28,3 +28,9 @@ Route::group(['prefix' => '/api/v1', 'namespace' => 'Api\V1'], function() {
         Route::get('/', 'IngredientController@index')->name('api.ingredient.index');
     });
 });
+
+
+Route::group(['prefix' => 'food'], function() {
+    Route::get('create', 'FoodController@create')->name('food.create');
+    Route::post('store', 'FoodController@store')->name('food.store');
+});

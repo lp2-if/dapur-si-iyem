@@ -13,6 +13,8 @@ class Food extends Model
 
     use SoftDeletes;
 
+    protected $fillable = ['name', 'tutorial'];
+
     public function ingredients()
     {
         return $this->belongsToMany(Ingredient::class, 'foods_ingredients', 'food_id', 'ingredient_id');
