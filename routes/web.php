@@ -22,11 +22,12 @@ Route::group(['prefix' => '/api/v1', 'namespace' => 'Api\V1'], function() {
 
     Route::group(['prefix' => 'glosary'], function() {
         Route::get('/', 'GlosaryController@index')->name('api.glosary.index');
-        Route::get('/{glosary}', 'GlosaryController@show')->name('api.glosary.index');
+        Route::get('/{glosary}', 'GlosaryController@show')->name('api.glosary.show');
     });
 
     Route::group(['prefix' => 'ingredient'], function() {
         Route::get('/', 'IngredientController@index')->name('api.ingredient.index');
+        Route::get('/{ingredient}', 'IngredientController@show')->name('api.glosary.show');
     });
 });
 

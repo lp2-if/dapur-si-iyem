@@ -19,4 +19,15 @@ class IngredientController extends ApiBaseController
         $ingredients = Ingredient::all('id', 'name');
         return $this->send($ingredients);
     }
+
+    public function show(Ingredient $ingredient)
+    {
+        $requiredData = [
+            'id' => $ingredient->id,
+            'name' => $ingredient->name,
+            'description' => $ingredient->note
+        ];
+
+        return $this->send($requiredData);
+    }
 }
