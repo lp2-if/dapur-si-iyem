@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Food;
+use App\Model\Ingredient;
 use Illuminate\Http\Request;
 
-class FoodController extends Controller
+class IngredientController extends Controller
 {
     public function create()
     {
-        $url = route('food.store');
+        $url = route('ingredient.store');
         return view('create', compact('url'));
     }
 
@@ -28,12 +28,8 @@ class FoodController extends Controller
             if($content != ""){
                 $data = explode($delimiter, $content);
                 $name = $data[0];
-                $tutorial = $data[1];
-                $recipe = $data[2];
-                Food::create([
-                    'name' => $name,
-                    'tutorial' => $tutorial,
-                    'recipe' => $recipe
+                Ingredient::create([
+                    'name' => $name
                 ]);
             }
         }

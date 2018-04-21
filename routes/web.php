@@ -39,3 +39,8 @@ Route::group(['prefix' => 'glosary'], function() {
     Route::get('create', 'GlosaryController@create')->name('glosary.create');
     Route::post('store', 'GlosaryController@store')->name('glosary.store');
 });
+
+Route::group(['prefix' => 'ingredient'], function() {
+    Route::get('create', 'IngredientController@create')->name('ingredient.create');
+    Route::post('store', 'IngredientController@store')->name('ingredient.store');
+});
