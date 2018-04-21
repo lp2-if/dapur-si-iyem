@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Food;
 use App\Model\Ingredient;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,8 @@ class IngredientController extends Controller
         $contents = str_replace('"', null, $contents);
         $contents = explode('\n', $contents);
 
+        $foods = Food::all();
+
         $delimiter = ',';
         unset($contents[0]);
         $contents = array_values($contents);
@@ -29,9 +32,15 @@ class IngredientController extends Controller
             if($content != ""){
                 $data = explode($delimiter, $content);
                 $name = $data[0];
-                Ingredient::create([
+                $name = strtolower($name);
+                $ingredient = Ingredient::create([
                     'name' => $name
                 ]);
+                foreach ($foods as $food) {
+                    if (strpos(strtolower($food->recipe),$name) !== false) {
+                        $food->ingredients()->attach($ingredient->id);
+                    }
+                }
             }
         }
         return back();
