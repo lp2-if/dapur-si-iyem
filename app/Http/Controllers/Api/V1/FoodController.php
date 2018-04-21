@@ -31,4 +31,17 @@ class FoodController extends ApiBaseController
         $sortedFoods = $foods->sortBy('missing');
         return $this->send($sortedFoods->values()->all());
     }
+
+    public function show(Food $food)
+    {
+        $requiredData = [
+            'id' => $food->id,
+            'name' => $food->name,
+            'tutorial' => $food->tutorial,
+            'recipe' => $food->recipe
+
+        ];
+
+        return $this->send($requiredData);
+    }
 }
