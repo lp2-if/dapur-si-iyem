@@ -11,5 +11,7 @@ class Glosary extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
 
+    protected $fillable = ['name', 'description'];
+
     use SoftDeletes;
 }
