@@ -20,6 +20,7 @@ class FoodController extends Controller
         $contents = file_get_contents($file, 'public');
         $contents = json_encode($contents);
         $contents = str_replace('"', null, $contents);
+        $contents = str_replace('\r', null, $contents);
         $contents = explode('\n', $contents);
 
         $ingredients = Ingredient::all();
@@ -29,21 +30,26 @@ class FoodController extends Controller
         $contents = array_values($contents);
         foreach ($contents as $content) {
             if($content != ""){
-                $data = explode($delimiter, $content);
-                $name = $data[0];
-                $tutorial = $data[1];
-                $recipe = $data[2];
-                $image = $data[3];
-                $food = Food::create([
-                    'name' => $name,
-                    'tutorial' => $tutorial,
-                    'recipe' => $recipe,
-                    'image' => $image
-                ]);
-                foreach ($ingredients as $ingredient) {
-                    if (strpos(strtolower($food->recipe),$ingredient->name) !== false) {
-                        $ingredient->foods()->attach($food->id);
+                try{
+                    $data = explode($delimiter, $content);
+                    $name = str_replace('\\', null, $data[0]);
+                    $tutorial = str_replace('\\', null, $data[1]);
+                    $recipe = str_replace('\\', null, $data[2]);
+                    $image = str_replace('\\', null, $data[3]);
+                    if ($name == "" or $tutorial == "" or $recipe == "" or $image == "") continue;
+                    $food = Food::create([
+                        'name' => $name,
+                        'tutorial' => $tutorial,
+                        'recipe' => $recipe,
+                        'image' => $image
+                    ]);
+                    foreach ($ingredients as $ingredient) {
+                        if (strpos(strtolower($food->recipe),$ingredient->name) !== false) {
+                            $ingredient->foods()->attach($food->id);
+                        }
                     }
+                } catch (\Exception $ex){
+
                 }
             }
         }
