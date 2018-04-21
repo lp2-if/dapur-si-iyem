@@ -12,4 +12,9 @@ class Ingredient extends Model
     public $timestamps = true;
 
     use SoftDeletes;
+
+    public function foods()
+    {
+        return $this->belongsToMany(Food::class, 'foods_ingredients', 'ingredient_id', 'food_id');
+    }
 }
