@@ -30,10 +30,12 @@ class FoodController extends Controller
                 $name = $data[0];
                 $tutorial = $data[1];
                 $recipe = $data[2];
+                $image = $data[3];
                 Food::create([
                     'name' => $name,
                     'tutorial' => $tutorial,
-                    'recipe' => $recipe
+                    'recipe' => $recipe,
+                    'image' => $image
                 ]);
             }
         }
