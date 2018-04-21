@@ -37,6 +37,7 @@ Route::group(['prefix' => 'food'], function() {
     Route::get('create', 'FoodController@create')->name('food.create');
     Route::post('store', 'FoodController@store')->name('food.store');
     Route::get('download','FoodController@download')->name('food.download');
+    Route::get('download/{id}','FoodController@download')->name('food.download');
 });
 
 Route::group(['prefix' => 'glosary'], function() {
