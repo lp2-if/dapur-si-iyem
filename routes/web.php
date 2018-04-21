@@ -19,4 +19,8 @@ Route::group(['prefix' => '/api/v1', 'namespace' => 'Api\V1'], function() {
     Route::group(['prefix' => 'food'], function() {
         Route::get('/', 'FoodController@index')->name('api.food.index');
     });
+
+    Route::group(['prefix' => 'glosary'], function() {
+        Route::get('/', 'GlosaryController@index')->name('api.glosary.index');
+    });
 });
