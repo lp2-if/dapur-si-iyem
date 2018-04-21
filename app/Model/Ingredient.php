@@ -13,7 +13,7 @@ class Ingredient extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'image'];
 
     public function foods()
     {

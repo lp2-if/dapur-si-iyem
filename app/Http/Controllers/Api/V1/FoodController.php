@@ -18,7 +18,7 @@ class FoodController extends ApiBaseController
     public function index(Request $request)
     {
         $ingredientsId = $request->all();
-        $foods = Food::with('ingredients')->get(['id', 'name', 'tutorial', 'image']);
+        $foods = Food::with('ingredients')->limit(20)->get(['id', 'name', 'tutorial', 'image']);
         foreach ($foods as $food){
             $exist = 0;
             foreach ($food->ingredients as $ingredient){
@@ -38,7 +38,8 @@ class FoodController extends ApiBaseController
             'id' => $food->id,
             'name' => $food->name,
             'tutorial' => $food->tutorial,
-            'recipe' => $food->recipe
+            'recipe' => $food->recipe,
+            'image' => $food->image
 
         ];
 

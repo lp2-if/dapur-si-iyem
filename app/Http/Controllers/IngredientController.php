@@ -21,7 +21,7 @@ class IngredientController extends Controller
         $contents = file_get_contents($file, 'public');
         $contents = json_encode($contents);
         $contents = str_replace('"', null, $contents);
-        $contents = explode('\n', $contents);
+        $contents = explode('\r\n', $contents);
 
         $foods = Food::all();
 
@@ -31,11 +31,15 @@ class IngredientController extends Controller
         foreach ($contents as $content) {
             if($content != ""){
                 $data = explode($delimiter, $content);
-                $name = $data[0];
+                $name = str_replace('\\', null, $data[0]);
+                $image = str_replace('\\', null, $data[1]);
+//                dd($image);
                 $name = strtolower($name);
                 $ingredient = Ingredient::create([
-                    'name' => $name
+                    'name' => $name,
+                    'image' => $image
                 ]);
+//                dd($ingredient);
                 foreach ($foods as $food) {
                     if (strpos(strtolower($food->recipe),$name) !== false) {
                         $food->ingredients()->attach($ingredient->id);
