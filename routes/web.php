@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => '/api/v1', 'namespace' => 'Api\V1'], function() {
+Route::group(['prefix' => '/api/v1', 'namespace' => 'Api\V1', 'middleware' => 'cors'], function() {
     Route::group(['prefix' => 'food'], function() {
-        Route::get('/', 'FoodController@index')->name('api.food.index');
+        Route::post('/', 'FoodController@index')->name('api.food.index');
     });
 
     Route::group(['prefix' => 'glosary'], function() {

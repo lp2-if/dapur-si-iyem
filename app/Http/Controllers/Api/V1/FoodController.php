@@ -11,12 +11,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\ApiBaseController;
 use App\Model\Food;
+use Illuminate\Http\Request;
 
 class FoodController extends ApiBaseController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ingredientsId = [1,2,3];
+        $ingredientsId = $request->all();
         $foods = Food::with('ingredients')->get(['id', 'name', 'tutorial', 'image']);
         foreach ($foods as $food){
             $exist = 0;
