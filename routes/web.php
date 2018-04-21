@@ -36,6 +36,6 @@ Route::group(['prefix' => 'food'], function() {
 });
 
 Route::group(['prefix' => 'glosary'], function() {
-    Route::get('create', 'CreateGlosaryController@create')->name('glosary.create');
-    Route::post('store', 'CreateGlosaryController@store')->name('glosary.store');
+    Route::get('create', 'GlosaryController@create')->name('glosary.create');
+    Route::post('store', 'GlosaryController@store')->name('glosary.store');
 });

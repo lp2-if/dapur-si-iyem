@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Glosary;
 use Illuminate\Http\Request;
 
-class CreateGlosaryController extends Controller
+class GlosaryController extends Controller
 {
     public function create()
     {
