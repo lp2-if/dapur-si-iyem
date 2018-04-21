@@ -17,7 +17,6 @@ class CreateBahanTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('image');
-            $table->text('note');
             $table->timestamps();
             $table->softDeletes();
         });
